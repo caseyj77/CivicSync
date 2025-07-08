@@ -1,4 +1,5 @@
 import './assets/main.css'
+import { applyThemeVars } from './theme/theme'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -13,7 +14,11 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 
+//apply themes
+applyThemeVars()
+
 app.mount('#app')
 
 // initalizing firebase auth listerner
 authStore().init()
+
