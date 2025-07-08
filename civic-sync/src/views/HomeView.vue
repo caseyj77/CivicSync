@@ -1,6 +1,7 @@
 <script setup>
 import SectionTemplate from '@/components/HomeViewComponents/SectionTemplate.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -11,7 +12,9 @@ import BaseButton from '@/components/UI/BaseButton.vue'
       CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
     </template>
     <template #action>
-      <BaseButton variant="primary">Get Started</BaseButton>
+      <RouterLink to ='/signup'>
+        <BaseButton variant="primary">Get Started</BaseButton>
+      </RouterLink>
     </template>
   </SectionTemplate>
 
