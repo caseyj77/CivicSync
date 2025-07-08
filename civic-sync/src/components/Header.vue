@@ -1,8 +1,28 @@
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { RouterLink } from 'vue-router'
 
-// Placeholder for future DB-loaded user name
-const userName = 'Casey';
+const userName = 'User'
+const showDropdown = ref(false)
+const avatarRef = ref(null)
+
+const toggleDropdown = () => {
+  showDropdown.value = !showDropdown.value
+}
+
+const handleClickOutside = (event) => {
+  if (avatarRef.value && !avatarRef.value.contains(event.target)) {
+    showDropdown.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <template>
@@ -10,15 +30,27 @@ const userName = 'Casey';
     <nav class="nav-container">
       <div class="nav-links">
         <RouterLink to="/" class="nav-link" exact-active-class="active-link">Home</RouterLink>
-        <RouterLink to="/journal" class="nav-link" exact-active-class="active-link">Journal</RouterLink>
-        <RouterLink to="/mindmap" class="nav-link" exact-active-class="active-link">Mind Map</RouterLink>
-        <RouterLink to="/resources" class="nav-link" exact-active-class="active-link">Resources</RouterLink>
+        <RouterLink to="/journal" class="nav-link" exact-active-class="active-link"
+          >Journal</RouterLink
+        >
+        <RouterLink to="/mindmap" class="nav-link" exact-active-class="active-link"
+          >Mind Map</RouterLink
+        >
+        <RouterLink to="/resources" class="nav-link" exact-active-class="active-link"
+          >Resources</RouterLink
+        >
       </div>
 
       <!-- User Card -->
-      <div class="user-card">
+      <div class="user-card" ref="avatarRef">
         <span class="user-name">{{ userName }}</span>
-        <div class="avatar-icon">👤</div>
+        <div class="avatar-icon" @click="toggleDropdown">
+          👤
+          <ul v-if="showDropdown" class="dropdown-list">
+            <li>Profile</li>
+            <li>Logout</li>
+          </ul>
+        </div>
       </div>
     </nav>
   </header>
@@ -78,5 +110,34 @@ const userName = 'Casey';
 
 .avatar-icon {
   font-size: 1.2rem;
+}
+
+.dropdown-list {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+  border-radius: 6px;
+  top: 2.5rem; /* adjust depending on avatar position */
+  right: 0;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-list li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dropdown-list li:hover {
+  background-color: #f5f5f5;
+}
+
+.avatar-icon {
+  position: relative;
+  cursor: pointer;
 }
 </style>

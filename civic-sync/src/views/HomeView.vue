@@ -9,7 +9,6 @@
   </div>
 </template>
 
-
 <style scoped>
 /* Style later */
 </style>
