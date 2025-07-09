@@ -1,18 +1,19 @@
 <script setup>
-import BaseButton from '../UI/BaseButton.vue';
-
+import BaseButton from '../UI/BaseButton.vue'
 </script>
 
 <template>
-    <section class="cta-section">
-        <div class="cta-content">
-            <h1 class="cta-title"> Lets Do This</h1>
-            <p class="cta-subtitle">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta quam excepturi ab unde necessitatibus voluptates.
-            </p>
-            <BaseButton variant="primary">Create Your Account</BaseButton>
-        </div>
-    </section>
+  <section class="cta-section">
+    <div class="cta-content">
+      <h1 class="cta-title">Lets Do This</h1>
+      <p class="cta-subtitle">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum
+        minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta
+        quam excepturi ab unde necessitatibus voluptates.
+      </p>
+      <BaseButton variant="primary">Create Your Account</BaseButton>
+    </div>
+  </section>
 </template>
 <style scoped>
 .cta-section {

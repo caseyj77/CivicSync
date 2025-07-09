@@ -1,17 +1,16 @@
-<script setup>
-
-
-</script>
+<script setup></script>
 
 <template>
-    <section class="feature-section">
-        <div class="feature-content">
-            <h1 class="feature-title"> Features of this app</h1>
-            <p class="feature-subtitle">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta quam excepturi ab unde necessitatibus voluptates.
-            </p>
-        </div>
-    </section>
+  <section class="feature-section">
+    <div class="feature-content">
+      <h1 class="feature-title">Features of this app</h1>
+      <p class="feature-subtitle">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum
+        minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta
+        quam excepturi ab unde necessitatibus voluptates.
+      </p>
+    </div>
+  </section>
 </template>
 <style scoped>
 .feature-section {

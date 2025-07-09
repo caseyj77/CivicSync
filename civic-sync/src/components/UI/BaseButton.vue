@@ -2,18 +2,14 @@
 defineProps({
   variant: {
     type: String,
-    default: 'primary' // can be 'primary', 'secondary', etc.
+    default: 'primary', // can be 'primary', 'secondary', etc.
   },
-  disabled: Boolean
+  disabled: Boolean,
 })
 </script>
 
 <template>
-  <button
-    :class="['base-button', variant]"
-    :disabled="disabled"
-    @click="$emit('click')"
-  >
+  <button :class="['base-button', variant]" :disabled="disabled" @click="$emit('click')">
     <slot />
   </button>
 </template>

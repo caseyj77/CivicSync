@@ -1,28 +1,59 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { RouterLink } from 'vue-router'
+import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
+import { useRouter, RouterLink } from 'vue-router'
+import { useAuthStore } from '@/stores/authStore'
+import LoginModal from './LoginModals/LoginModal.vue'
+import RegisterModal from './LoginModals/RegisterModal.vue'
 
-const userName = 'User'
+const router = useRouter()
+const authStore = useAuthStore()
+
 const showDropdown = ref(false)
 const avatarRef = ref(null)
 
+// Toggle dropdown visibility when avatar is clicked
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
 
+// Close dropdown when clicking outside of avatar/profile area
 const handleClickOutside = (event) => {
   if (avatarRef.value && !avatarRef.value.contains(event.target)) {
     showDropdown.value = false
   }
 }
 
+// Set up event listener and start Firebase auth tracking
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
+  authStore.init() // starts listening to Firebase auth state changes
 })
 
 onBeforeUnmount(() => {
   document.removeEventListener('click', handleClickOutside)
 })
+
+// Computed: true if user is logged in
+const isUserLoggedIn = computed(() => !!authStore.user)
+
+// Computed: show user's email if logged in, otherwise "Guest"
+const userName = computed(() => authStore.user?.email || 'Guest')
+
+/**
+ * Handles clicking Login or Logout in the dropdown
+ * - If user is logged in, logs them out and redirects to home
+ * - If user is not logged in, redirects to /login page
+ */
+const handleLoginLogout = async () => {
+  showDropdown.value = false
+
+  if (isUserLoggedIn.value) {
+    await authStore.logout()
+    router.push('/') // redirect after logout
+  } else {
+    router.push('/login') // go to login page
+  }
+}
 </script>
 
 <template>
@@ -48,7 +79,9 @@ onBeforeUnmount(() => {
           👤
           <ul v-if="showDropdown" class="dropdown-list">
             <li>Profile</li>
-            <li>Logout</li>
+            <li @click="handleLoginLogout">
+              {{ isUserLoggedIn ? 'Logout' : 'Login' }}
+            </li>
           </ul>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <script setup>
 import SectionTemplate from '@/components/HomeViewComponents/SectionTemplate.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
-import { RouterLink } from 'vue-router';
+import { RouterLink } from 'vue-router'
 </script>
 
 <template>
@@ -12,26 +12,27 @@ import { RouterLink } from 'vue-router';
       CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
     </template>
     <template #action>
-      <RouterLink to ='/signup'>
+      <RouterLink to="/signup">
         <BaseButton variant="primary">Get Started</BaseButton>
       </RouterLink>
     </template>
   </SectionTemplate>
 
   <!-- Features (Layout B) -->
-  <SectionTemplate layout="b" >
+  <SectionTemplate layout="b">
     <template #title>Features of CivicSync</template>
     <template #subtitle>
-      Explore journaling, mind maps, and curated resources to better understand your civic values and how they connect.
+      Explore journaling, mind maps, and curated resources to better understand your civic values
+      and how they connect.
     </template>
-    
   </SectionTemplate>
 
   <!-- Journal (Layout A) -->
   <SectionTemplate layout="a" background="var(--color-accent)">
     <template #title>Journal Your Journey</template>
     <template #subtitle>
-      Reflect on your experiences, beliefs, and personal growth over time in a private, structured space.
+      Reflect on your experiences, beliefs, and personal growth over time in a private, structured
+      space.
     </template>
     <template #action>
       <BaseButton variant="primary">Start Journaling</BaseButton>

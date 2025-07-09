@@ -7,7 +7,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-import { authStore } from './stores/authStore'
+import { useAuthStore } from './stores/authStore'
 
 const app = createApp(App)
 
@@ -20,5 +20,4 @@ applyThemeVars()
 app.mount('#app')
 
 // initalizing firebase auth listerner
-authStore().init()
-
+useAuthStore().init()

@@ -1,20 +1,18 @@
 <script setup>
-
 defineProps({
-    layout: {
-        type: String,
-        default: 'a' //chooses your layout
-    },
-    background: {
-        type: String,
-        default: 'var(--color-background)' // sets the default background for the section
-    }
+  layout: {
+    type: String,
+    default: 'a', //chooses your layout
+  },
+  background: {
+    type: String,
+    default: 'var(--color-background)', // sets the default background for the section
+  },
 })
-
 </script>
 
 <template>
-     <section :class="['section-wrapper', layout]" :style="{ backgroundColor: background }">
+  <section :class="['section-wrapper', layout]" :style="{ backgroundColor: background }">
     <div class="section-content">
       <h1 class="section-title">
         <slot name="title">Default Title</slot>
@@ -24,7 +22,7 @@ defineProps({
       </p>
       <slot name="action" />
     </div>
-  </section> 
+  </section>
 </template>
 
 <style scoped>

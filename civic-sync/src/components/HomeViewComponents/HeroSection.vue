@@ -1,22 +1,19 @@
-<script setup >
-import BaseButton from '../UI/BaseButton.vue';
-
-
+<script setup>
+import BaseButton from '../UI/BaseButton.vue'
 </script>
 
 <template>
- <section class="hero-section">
+  <section class="hero-section">
     <div class="hero-content">
-        <h1 class="hero-title"> Build Your Belief System</h1>
-        <p class="hero-subtitle">
-            CivicSync helps you reflect, map, and grow your political thinking - without partisan noise.
-        </p>
-        <RouterLink to ='/signup'>
-            <BaseButton variant="primary">Get Started</BaseButton>
-        </RouterLink>
+      <h1 class="hero-title">Build Your Belief System</h1>
+      <p class="hero-subtitle">
+        CivicSync helps you reflect, map, and grow your political thinking - without partisan noise.
+      </p>
+      <RouterLink to="/signup">
+        <BaseButton variant="primary">Get Started</BaseButton>
+      </RouterLink>
     </div>
- </section>
-
+  </section>
 </template>
 
 <style scoped>

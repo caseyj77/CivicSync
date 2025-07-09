@@ -1,17 +1,16 @@
-<script setup>
-
-
-</script>
+<script setup></script>
 
 <template>
-    <section class="journal-section">
-        <div class="journal-content">
-            <h1 class="journal-title"> Private Journaling</h1>
-            <p class="journal-subtitle">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta quam excepturi ab unde necessitatibus voluptates.
-            </p>
-        </div>
-    </section>
+  <section class="journal-section">
+    <div class="journal-content">
+      <h1 class="journal-title">Private Journaling</h1>
+      <p class="journal-subtitle">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore iure facere sint dolorum
+        minima reiciendis maxime iusto, recusandae reprehenderit ex nam inventore corrupti. Soluta
+        quam excepturi ab unde necessitatibus voluptates.
+      </p>
+    </div>
+  </section>
 </template>
 <style scoped>
 .journal-section {
