@@ -1,12 +1,14 @@
 <!-- JournalView.vue -->
 <script setup>
+import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue';
+
 // Add logic later
 </script>
 
 <template>
   <div>
     <h1>Journal</h1>
-    <p>This is the Journal page.</p>
+    <JournalEditor />
   </div>
 </template>
 
