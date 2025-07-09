@@ -53,38 +53,70 @@ const handleLogin = async () => {
 .form-container {
   max-width: 400px;
   margin: auto;
-  padding: 2rem;
-  border-radius: 8px;
-  background-color: #fff;
+  padding: var(--space-lg);
+  border-radius: var(--radius-base);
+  background-color: var(--color-basic);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 label {
   display: block;
-  margin-top: 1rem;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xs);
   font-weight: bold;
+  font-size: var(--font-base);
+  color: var(--color-text);
 }
 
 input {
   width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-base);
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius-base);
   box-sizing: border-box;
+  background-color: var(--color-basic);
+  color: var(--color-text);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(134, 93, 54, 0.2);
 }
 
 .button-container {
-  margin-top: 1.5rem;
+  margin-top: var(--space-md);
   text-align: center;
 }
 
 button {
-  padding: 0.75rem 1.5rem;
+  padding: var(--space-sm) var(--space-lg);
   font-weight: bold;
+  font-size: var(--font-base);
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-base);
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--color-secondary);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .error {
-  margin-top: 1rem;
-  color: red;
+  margin-top: var(--space-sm);
+  color: var(--color-danger);
   text-align: center;
+  font-size: var(--font-sm);
 }
+
 </style>

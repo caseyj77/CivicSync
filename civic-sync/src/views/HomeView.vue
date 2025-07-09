@@ -9,16 +9,15 @@ const showRegisterModal = ref(false)
 
 <template>
   <!-- Hero Section (Layout A) -->
-<SectionTemplate layout="a" background="var(--color-accent)">
-  <template #title>Build Your Belief System</template>
-  <template #subtitle>
-    CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
-  </template>
-  <template #action>
-    <BaseButton variant="primary" @click="showRegisterModal = true">Get Started</BaseButton>
-  </template>
-</SectionTemplate>
-
+  <SectionTemplate layout="a" background="var(--color-accent)">
+    <template #title>Build Your Belief System</template>
+    <template #subtitle>
+      CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
+    </template>
+    <template #action>
+      <BaseButton variant="primary" @click="showRegisterModal = true">Get Started</BaseButton>
+    </template>
+  </SectionTemplate>
 
   <!-- Features (Layout B) -->
   <SectionTemplate layout="b">
@@ -52,7 +51,6 @@ const showRegisterModal = ref(false)
     </template>
   </SectionTemplate>
   <RegisterModal v-if="showRegisterModal" @close="showRegisterModal = false" />
-
 </template>
 
 <style scoped>

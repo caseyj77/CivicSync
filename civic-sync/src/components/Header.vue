@@ -62,8 +62,6 @@ const openLogin = () => {
   showDropdown.value = false
   showLoginModal.value = true
 }
-
-
 </script>
 
 <template>
@@ -96,10 +94,7 @@ const openLogin = () => {
       </div>
     </nav>
   </header>
-    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
-    
-
-
+  <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
 </template>
 
 <style scoped>

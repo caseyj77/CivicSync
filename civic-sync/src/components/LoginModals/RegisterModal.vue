@@ -6,7 +6,6 @@ import { useAuthStore } from '@/stores/authStore'
 const authStore = useAuthStore()
 const emit = defineEmits(['close'])
 
-
 const registerData = ref({
   email: '',
   password: '',

@@ -7,17 +7,18 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
-import { useAuthStore } from './stores/authStore'
-
 const app = createApp(App)
+const pinia = createPinia()
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 
-//apply themes
+// Apply theme CSS variables
 applyThemeVars()
 
+// Mount the app
 app.mount('#app')
 
-// initalizing firebase auth listerner
-useAuthStore().init()
+// ✅ After Pinia is installed, THEN call useAuthStore
+import { useAuthStore } from './stores/authStore'
+useAuthStore(pinia).init()
