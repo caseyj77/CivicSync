@@ -1,8 +1,11 @@
+<!-- RegisterModal.vue -->
 <script setup>
 import { ref } from 'vue'
 import { useAuthStore } from '@/stores/authStore'
 
 const authStore = useAuthStore()
+const emit = defineEmits(['close'])
+
 
 const registerData = ref({
   email: '',

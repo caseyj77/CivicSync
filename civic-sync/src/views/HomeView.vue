@@ -1,22 +1,24 @@
 <script setup>
 import SectionTemplate from '@/components/HomeViewComponents/SectionTemplate.vue'
 import BaseButton from '@/components/UI/BaseButton.vue'
-import { RouterLink } from 'vue-router'
+import RegisterModal from '@/components/LoginModals/RegisterModal.vue' // ← import this
+import { ref } from 'vue'
+
+const showRegisterModal = ref(false)
 </script>
 
 <template>
   <!-- Hero Section (Layout A) -->
-  <SectionTemplate layout="a" background="var(--color-accent)">
-    <template #title>Build Your Belief System</template>
-    <template #subtitle>
-      CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
-    </template>
-    <template #action>
-      <RouterLink to="/signup">
-        <BaseButton variant="primary">Get Started</BaseButton>
-      </RouterLink>
-    </template>
-  </SectionTemplate>
+<SectionTemplate layout="a" background="var(--color-accent)">
+  <template #title>Build Your Belief System</template>
+  <template #subtitle>
+    CivicSync helps you reflect, map, and grow your political thinking — without partisan noise.
+  </template>
+  <template #action>
+    <BaseButton variant="primary" @click="showRegisterModal = true">Get Started</BaseButton>
+  </template>
+</SectionTemplate>
+
 
   <!-- Features (Layout B) -->
   <SectionTemplate layout="b">
@@ -49,6 +51,8 @@ import { RouterLink } from 'vue-router'
       <BaseButton variant="primary">Launch Map Tool</BaseButton>
     </template>
   </SectionTemplate>
+  <RegisterModal v-if="showRegisterModal" @close="showRegisterModal = false" />
+
 </template>
 
 <style scoped>

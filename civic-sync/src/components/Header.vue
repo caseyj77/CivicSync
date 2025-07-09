@@ -1,3 +1,4 @@
+<!-- Header.vue -->
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
@@ -54,6 +55,15 @@ const handleLoginLogout = async () => {
     router.push('/login') // go to login page
   }
 }
+
+const showLoginModal = ref(false)
+
+const openLogin = () => {
+  showDropdown.value = false
+  showLoginModal.value = true
+}
+
+
 </script>
 
 <template>
@@ -79,14 +89,17 @@ const handleLoginLogout = async () => {
           👤
           <ul v-if="showDropdown" class="dropdown-list">
             <li>Profile</li>
-            <li @click="handleLoginLogout">
-              {{ isUserLoggedIn ? 'Logout' : 'Login' }}
-            </li>
+            <li v-if="isUserLoggedIn" @click="handleLoginLogout">Logout</li>
+            <li v-else @click="openLogin">Login</li>
           </ul>
         </div>
       </div>
     </nav>
   </header>
+    <LoginModal v-if="showLoginModal" @close="showLoginModal = false" />
+    
+
+
 </template>
 
 <style scoped>

@@ -1,3 +1,4 @@
+<!-- LoginForm.vue -->
 <script setup>
 import { useAuthStore } from '@/stores/authStore'
 import { ref } from 'vue'
