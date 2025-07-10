@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tiptap/extension-highlight": "^2.25.0",
+    "@tiptap/extension-placeholder": "^2.25.0",
     "@tiptap/pm": "^2.25.0",
     "@tiptap/starter-kit": "^2.25.0",
     "@tiptap/vue-3": "^2.25.0",

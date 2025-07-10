@@ -36,7 +36,9 @@ const showRegisterModal = ref(false)
       space.
     </template>
     <template #action>
-      <BaseButton variant="primary">Start Journaling</BaseButton>
+      <RouterLink to="/journal">
+        <BaseButton variant="primary">Start Journaling</BaseButton>
+      </RouterLink>
     </template>
   </SectionTemplate>
 

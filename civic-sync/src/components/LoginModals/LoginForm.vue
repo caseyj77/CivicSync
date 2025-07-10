@@ -118,5 +118,4 @@ button:disabled {
   text-align: center;
   font-size: var(--font-sm);
 }
-
 </style>

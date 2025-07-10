@@ -1,6 +1,6 @@
 <!-- JournalView.vue -->
 <script setup>
-import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue';
+import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue'
 
 // Add logic later
 </script>
@@ -12,6 +12,4 @@ import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue'
   </div>
 </template>
 
-<style scoped>
-/* Style later */
-</style>
+<style scoped></style>

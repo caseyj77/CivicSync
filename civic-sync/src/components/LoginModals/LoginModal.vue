@@ -6,14 +6,14 @@ import { watch, toRef } from 'vue'
 
 const authStore = useAuthStore()
 const emit = defineEmits(['close'])
-const userRef= toRef(authStore, 'user')
+const userRef = toRef(authStore, 'user')
 
 // Close modal when user successfully logs in
 watch(
   () => userRef.value,
   (newUser) => {
     if (newUser) emit('close')
-  }
+  },
 )
 </script>
 
