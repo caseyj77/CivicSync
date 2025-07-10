@@ -26,7 +26,9 @@ const editor = useEditor({
 
 const journalStore = useJournalStore()
 
-function handleSubmit() {
+function handleSubmit(event) {
+  event?.preventDefault()
+  
   if (!editor.value) return
 
   const newEntry = createJournalEntry({
@@ -34,9 +36,10 @@ function handleSubmit() {
     tags: selectedTags.value.split(',').map((tag) => tag.trim()),
     content: editor.value.getJSON(),
   })
-  console.log(newEntry)
+
   journalStore.addEntry(newEntry)
 }
+
 
 function handleClearSubmit() {
   titleInput.value = ''

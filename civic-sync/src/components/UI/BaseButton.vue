@@ -1,18 +1,22 @@
 <script setup>
+import { useAttrs } from 'vue'
+const attrs = useAttrs()
+
 defineProps({
   variant: {
     type: String,
-    default: 'primary', // can be 'primary', 'secondary', etc.
+    default: 'primary',
   },
   disabled: Boolean,
 })
 </script>
 
 <template>
-  <button :class="['base-button', variant]" :disabled="disabled" @click="$emit('click')">
+  <button v-bind="attrs" :class="['base-button', variant]" :disabled="disabled">
     <slot />
   </button>
 </template>
+
 
 <style scoped>
 .base-button {
