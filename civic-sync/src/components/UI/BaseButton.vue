@@ -17,7 +17,6 @@ defineProps({
   </button>
 </template>
 
-
 <style scoped>
 .base-button {
   padding: var(--space-sm) var(--space-md);

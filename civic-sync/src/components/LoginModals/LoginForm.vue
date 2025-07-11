@@ -1,10 +1,12 @@
 <!-- LoginForm.vue -->
 <script setup>
 import { useAuthStore } from '@/stores/authStore'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useJournalStore } from '@/stores/journalStore'
 
 //activate authStore
 const authStore = useAuthStore()
+const journalStore = useJournalStore()
 
 const userLoginData = ref({
   email: '',
@@ -12,8 +14,20 @@ const userLoginData = ref({
 })
 
 const handleLogin = async () => {
-  await authStore.login(userLoginData.value.email, userLoginData.value.password)
+  try {
+    await authStore.login(userLoginData.value.email, userLoginData.value.password)
+
+    // ✅ Only load entries if login is successful and user exists
+    if (authStore.user) {
+      await journalStore.loadEntries()
+    }
+  } catch (error) {
+    console.error('Login failed:', error)
+  }
 }
+
+
+
 </script>
 
 <template>

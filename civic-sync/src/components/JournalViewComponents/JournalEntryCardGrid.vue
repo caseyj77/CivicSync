@@ -1,9 +1,10 @@
-<!-- JournalEntryCardGrid.vue -->
 <script setup>
 import { useJournalStore } from '@/stores/journalStore'
 import JournalEntryCard from '@/components/UI/JournalEntryCard.vue'
 
 const journalStore = useJournalStore()
+
+
 </script>
 
 <template>
@@ -11,11 +12,7 @@ const journalStore = useJournalStore()
     <p>No journal entries yet.</p>
   </div>
   <div v-else class="entry-grid">
-    <JournalEntryCard
-      v-for="entry in journalStore.journalEntries"
-      :key="entry.id"
-      :entry="entry"
-    />
+    <JournalEntryCard v-for="entry in journalStore.journalEntries" :key="entry.id" :entry="entry" />
   </div>
 </template>
 

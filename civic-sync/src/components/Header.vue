@@ -5,6 +5,7 @@ import { useRouter, RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/authStore'
 import LoginModal from './LoginModals/LoginModal.vue'
 import RegisterModal from './LoginModals/RegisterModal.vue'
+import { useJournalStore } from '@/stores/journalStore'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -50,7 +51,10 @@ const handleLoginLogout = async () => {
 
   if (isUserLoggedIn.value) {
     await authStore.logout()
+    const journalStore = useJournalStore()
+    journalStore.journalEntries = []
     router.push('/') // redirect after logout
+    
   } else {
     router.push('/login') // go to login page
   }

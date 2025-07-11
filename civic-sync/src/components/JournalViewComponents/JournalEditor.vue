@@ -28,7 +28,7 @@ const journalStore = useJournalStore()
 
 function handleSubmit(event) {
   event?.preventDefault()
-  
+
   if (!editor.value) return
 
   const newEntry = createJournalEntry({
@@ -39,7 +39,6 @@ function handleSubmit(event) {
 
   journalStore.addEntry(newEntry)
 }
-
 
 function handleClearSubmit() {
   titleInput.value = ''
@@ -111,12 +110,11 @@ function handleClearSubmit() {
   border: 1px solid var(--color-muted);
   border-radius: var(--radius-base);
   padding: var(--space-md);
-  background-color: #F5F1ED; /* soft neutral tone */
+  background-color: #f5f1ed; /* soft neutral tone */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   color: var(--color-text);
   font-size: var(--font-base);
 }
-
 
 .toolbar {
   margin-bottom: var(--space-sm);

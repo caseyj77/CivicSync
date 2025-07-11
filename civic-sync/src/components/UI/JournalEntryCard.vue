@@ -4,7 +4,7 @@ defineProps({
   entry: {
     type: Object,
     required: true,
-  }
+  },
 })
 </script>
 
@@ -15,7 +15,10 @@ defineProps({
     <div class="entry-tags">
       <span v-for="tag in entry.tags" :key="tag" class="tag-badge">{{ tag }}</span>
     </div>
-    <p class="entry-preview" v-html="entry.content?.content?.[0]?.content?.[0]?.text?.slice(0, 120) + '...'"></p>
+    <p
+      class="entry-preview"
+      v-html="entry.content?.content?.[0]?.content?.[0]?.text?.slice(0, 120) + '...'"
+    ></p>
     <!-- Add View/Edit buttons here later -->
   </div>
 </template>

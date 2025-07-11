@@ -1,10 +1,8 @@
 <!-- JournalView.vue -->
 <script setup>
 import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue'
-import JournalEntryCardGrid from '@/components/JournalViewComponents/JournalEntryCardGrid.vue';
+import JournalEntryCardGrid from '@/components/JournalViewComponents/JournalEntryCardGrid.vue'
 
-
-// Add logic later
 </script>
 
 <template>
@@ -13,7 +11,6 @@ import JournalEntryCardGrid from '@/components/JournalViewComponents/JournalEntr
     <JournalEditor />
     <JournalEntryCardGrid />
   </div>
-  
 </template>
 
 <style scoped></style>
