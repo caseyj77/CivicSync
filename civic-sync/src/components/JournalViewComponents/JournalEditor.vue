@@ -1,6 +1,6 @@
 <!-- JournalEditor.vue -->
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import Highlight from '@tiptap/extension-highlight'
@@ -28,16 +28,25 @@ const journalStore = useJournalStore()
 
 function handleSubmit(event) {
   event?.preventDefault()
-
   if (!editor.value) return
 
-  const newEntry = createJournalEntry({
+  const updatedOrNewEntry = {
     title: titleInput.value,
     tags: selectedTags.value.split(',').map((tag) => tag.trim()),
     content: editor.value.getJSON(),
-  })
+  }
 
-  journalStore.addEntry(newEntry)
+  if (journalStore.currentEntry) {
+    // 🛠 Update existing entry
+    journalStore.saveEditedEntry(journalStore.currentEntry.id, updatedOrNewEntry)
+  } else {
+    // 🆕 Create new entry
+    const newEntry = createJournalEntry(updatedOrNewEntry)
+    journalStore.addEntry(newEntry)
+  }
+
+  // Optional: reset editor after save
+  handleClearSubmit()
 }
 
 function handleClearSubmit() {
@@ -45,6 +54,17 @@ function handleClearSubmit() {
   selectedTags.value = ''
   editor.value.commands.clearContent()
 }
+
+watch(
+  () => journalStore.currentEntry,
+  (entry) => {
+    if (!entry || !editor.value) return
+
+    titleInput.value = entry.title || ''
+    selectedTags.value = Array.isArray(entry.tags) ? entry.tags.join(', ') : ''
+    editor.value.commands.setContent(entry.content || { type: 'doc', content: [] })
+  },
+)
 </script>
 
 <template>
@@ -99,7 +119,9 @@ function handleClearSubmit() {
 
     <div class="editor-footer">
       <!-- Submit Button -->
-      <BaseButton variant="primary" @click="handleSubmit"> Save Entry </BaseButton>
+      <BaseButton variant="primary" @click="handleSubmit">
+        {{ journalStore.currentEntry ? 'Update Entry' : 'Save Entry' }}
+      </BaseButton>
       <BaseButton variant="secondary" @click="handleClearSubmit"> Clear Entry </BaseButton>
     </div>
   </div>

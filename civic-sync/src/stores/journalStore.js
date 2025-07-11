@@ -3,17 +3,20 @@ import { useAuthStore } from './authStore'
 import { db } from '@/firebase'
 import {
   collection,
-  addDoc,
-  serverTimestamp,
+  doc,
+  setDoc,
+  getDocs,
   query,
   where,
   orderBy,
-  getDocs,
+  updateDoc,
+  serverTimestamp,
 } from 'firebase/firestore'
 
 export const useJournalStore = defineStore('journal', {
   state: () => ({
     journalEntries: [],
+    currentEntry: null,
   }),
 
   actions: {
@@ -26,8 +29,9 @@ export const useJournalStore = defineStore('journal', {
 
       if (user?.uid) {
         try {
-          console.log('📤 Saving to Firestore...')
-          await addDoc(collection(db, 'journalEntries'), {
+          console.log('📤 Saving to Firestore (custom ID)...')
+          const entryRef = doc(db, 'journalEntries', entry.id)
+          await setDoc(entryRef, {
             ...entry,
             uid: user.uid,
             createdAt: serverTimestamp(),
@@ -56,7 +60,7 @@ export const useJournalStore = defineStore('journal', {
         const q = query(
           collection(db, 'journalEntries'),
           where('uid', '==', user.uid),
-          orderBy('createdAt', 'desc'),
+          orderBy('createdAt', 'desc')
         )
         const querySnapshot = await getDocs(q)
         this.journalEntries = querySnapshot.docs.map((doc) => ({
@@ -66,6 +70,36 @@ export const useJournalStore = defineStore('journal', {
         console.log('📊 Loaded entries:', this.journalEntries)
       } catch (error) {
         console.error('❌ Error loading entries:', error)
+      }
+    },
+
+    updateEntry(entry) {
+      this.currentEntry = entry
+    },
+
+    async saveEditedEntry(id, updatedEntry) {
+      console.log('🛠 Updating entry:', id)
+
+      try {
+        const entryRef = doc(db, 'journalEntries', id)
+        await updateDoc(entryRef, {
+          ...updatedEntry,
+          updatedAt: serverTimestamp(),
+        })
+
+        const index = this.journalEntries.findIndex((entry) => entry.id === id)
+        if (index !== -1) {
+          this.journalEntries[index] = {
+            ...this.journalEntries[index],
+            ...updatedEntry,
+            updatedAt: new Date(),
+          }
+        }
+
+        this.currentEntry = null
+        console.log('✅ Entry updated successfully')
+      } catch (error) {
+        console.error('❌ Failed to update entry:', error)
       }
     },
   },

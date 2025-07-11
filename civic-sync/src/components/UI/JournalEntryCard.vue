@@ -1,5 +1,7 @@
 <!-- JournalEntryCard.vue -->
 <script setup>
+import CardButton from './CardButton.vue'
+
 defineProps({
   entry: {
     type: Object,
@@ -20,6 +22,10 @@ defineProps({
       v-html="entry.content?.content?.[0]?.content?.[0]?.text?.slice(0, 120) + '...'"
     ></p>
     <!-- Add View/Edit buttons here later -->
+    <div class="card-footer">
+      <CardButton variant="info" @click="$emit('update', entry)">Update</CardButton>
+      <CardButton variant="danger">Delete</CardButton>
+    </div>
   </div>
 </template>
 
@@ -59,5 +65,11 @@ defineProps({
   margin-top: 0.5rem;
   color: var(--color-text);
   font-size: 0.9rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 </style>

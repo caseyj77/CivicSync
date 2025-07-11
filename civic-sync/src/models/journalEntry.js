@@ -7,7 +7,7 @@ export function createJournalEntry({
   content = '',
 } = {}) {
   return {
-    id: `entry-${Date.now()}`,
+    id: `entry-${date}-${Math.random().toString(36).slice(2, 8)}`,
     title: title.trim(),
     tags: Array.isArray(tags) ? tags : [],
     date,
