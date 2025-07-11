@@ -25,9 +25,6 @@ const handleLogin = async () => {
     console.error('Login failed:', error)
   }
 }
-
-
-
 </script>
 
 <template>

@@ -54,7 +54,6 @@ const handleLoginLogout = async () => {
     const journalStore = useJournalStore()
     journalStore.journalEntries = []
     router.push('/') // redirect after logout
-    
   } else {
     router.push('/login') // go to login page
   }

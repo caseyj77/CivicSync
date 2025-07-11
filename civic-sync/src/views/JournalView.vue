@@ -2,7 +2,6 @@
 <script setup>
 import JournalEditor from '@/components/JournalViewComponents/JournalEditor.vue'
 import JournalEntryCardGrid from '@/components/JournalViewComponents/JournalEntryCardGrid.vue'
-
 </script>
 
 <template>

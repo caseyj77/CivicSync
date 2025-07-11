@@ -1,17 +1,29 @@
 // src/theme/theme.js
 
 const theme = {
+  // colors: {
+  //   primary: '#865D36', // warm oak
+  //   secondary: '#AC8968', // desert clay
+  //   accent: '#A69080', // dusty beige
+  //   background: '#F5F3F0', // light neutral background
+  //   text: '#3E362E', // deep brown
+  //   muted: '#93785B', // taupe
+  //   danger: '#D9534F', // alert red
+  //   success: '#5CB85C', // success green
+  //   info: '#5BC0DE', // info blue
+  //   basic: '#ffffff', // white
+  // },
   colors: {
-    primary: '#865D36', // warm oak
-    secondary: '#AC8968', // desert clay
-    accent: '#A69080', // dusty beige
-    background: '#F5F3F0', // light neutral background
-    text: '#3E362E', // deep brown
-    muted: '#93785B', // taupe
-    danger: '#D9534F', // alert red
-    success: '#5CB85C', // success green
-    info: '#5BC0DE', // info blue
-    basic: '#ffffff', // white
+    primary: '#FF6B6B', // flamingo red – bold, expressive
+    secondary: '#4ECDC4', // tropical teal – fresh & energetic
+    accent: '#FFE66D', // sunbeam yellow – playful contrast
+    background: '#F7FFF7', // minty white – soft base with personality
+    text: '#1A1A1A', // deep black – high contrast
+    muted: '#A29BFE', // periwinkle – cool for borders & inactive UI
+    danger: '#FF3B30', // bright red – clear alerts
+    success: '#2ECC71', // crisp green – modern success tone
+    info: '#3498DB', // clean sky blue – universal info cue
+    basic: '#FFFFFF', // white – fallback neutral
   },
   fontSizes: {
     sm: '0.875rem',

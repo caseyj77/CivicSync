@@ -3,8 +3,6 @@ import { useJournalStore } from '@/stores/journalStore'
 import JournalEntryCard from '@/components/UI/JournalEntryCard.vue'
 
 const journalStore = useJournalStore()
-
-
 </script>
 
 <template>
