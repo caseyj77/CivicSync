@@ -4,7 +4,6 @@ import JournalEntryCard from '@/components/UI/JournalEntryCard.vue'
 
 const journalStore = useJournalStore()
 
-
 function handleUpdate(entry) {
   console.log('📝 Update clicked — entry payload:', entry)
   journalStore.updateEntry(entry)

@@ -17,9 +17,8 @@ watch(
       journalStore.loadEntries()
     }
   },
-  { immediate: true }
+  { immediate: true },
 )
-
 </script>
 
 <template>

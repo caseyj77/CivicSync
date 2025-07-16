@@ -60,7 +60,7 @@ export const useJournalStore = defineStore('journal', {
         const q = query(
           collection(db, 'journalEntries'),
           where('uid', '==', user.uid),
-          orderBy('createdAt', 'desc')
+          orderBy('createdAt', 'desc'),
         )
         const querySnapshot = await getDocs(q)
         this.journalEntries = querySnapshot.docs.map((doc) => ({
