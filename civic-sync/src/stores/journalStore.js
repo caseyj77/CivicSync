@@ -11,6 +11,7 @@ import {
   orderBy,
   updateDoc,
   serverTimestamp,
+  deleteDoc,
 } from 'firebase/firestore'
 
 export const useJournalStore = defineStore('journal', {
@@ -100,6 +101,24 @@ export const useJournalStore = defineStore('journal', {
         console.log('✅ Entry updated successfully')
       } catch (error) {
         console.error('❌ Failed to update entry:', error)
+      }
+    },
+
+    async deleteEntry(id) {
+      console.log('🗑 Deleting entry:', id)
+
+      try {
+        const entryRef = doc(db, 'journalEntries', id)
+        await deleteDoc(entryRef)
+
+        this.journalEntries = this.journalEntries.filter((entry) => entry.id !== id)
+        if (this.currentEntry?.id === id) {
+          this.currentEntry = null
+        }
+
+        console.log('✅ Entry deleted successfully')
+      } catch (error) {
+        console.error('❌ Failed to delete entry:', error)
       }
     },
   },

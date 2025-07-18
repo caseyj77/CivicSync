@@ -1,6 +1,9 @@
 <!-- JournalEntryCard.vue -->
 <script setup>
 import CardButton from './CardButton.vue'
+import { useJournalStore } from '@/stores/journalStore'
+
+const journalStore = useJournalStore()
 
 defineProps({
   entry: {
@@ -8,6 +11,12 @@ defineProps({
     required: true,
   },
 })
+
+function handleDelete(id){
+  if(window.confirm(`Delete this entry?`)) {
+    journalStore.deleteEntry(id)
+  }
+}
 </script>
 
 <template>
@@ -24,7 +33,10 @@ defineProps({
     <!-- Add View/Edit buttons here later -->
     <div class="card-footer">
       <CardButton variant="info" @click="$emit('update', entry)">Update</CardButton>
-      <CardButton variant="danger">Delete</CardButton>
+      <CardButton variant="danger" 
+          @click="handleDelete(entry.id)">
+          Delete
+        </CardButton>
     </div>
   </div>
 </template>
