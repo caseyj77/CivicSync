@@ -12,8 +12,8 @@ defineProps({
   },
 })
 
-function handleDelete(id){
-  if(window.confirm(`Delete this entry?`)) {
+function handleDelete(id) {
+  if (window.confirm(`Delete this entry? This action can not be undone.`)) {
     journalStore.deleteEntry(id)
   }
 }
@@ -33,10 +33,7 @@ function handleDelete(id){
     <!-- Add View/Edit buttons here later -->
     <div class="card-footer">
       <CardButton variant="info" @click="$emit('update', entry)">Update</CardButton>
-      <CardButton variant="danger" 
-          @click="handleDelete(entry.id)">
-          Delete
-        </CardButton>
+      <CardButton variant="danger" @click="handleDelete(entry.id)"> Delete </CardButton>
     </div>
   </div>
 </template>
