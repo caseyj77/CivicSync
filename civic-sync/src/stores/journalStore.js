@@ -31,7 +31,7 @@ export const useJournalStore = defineStore('journal', {
       if (user?.uid) {
         try {
           console.log('📤 Saving to Firestore (custom ID)...')
-          const entryRef = doc(db, 'journalEntries', entry.id)
+          const entryRef = doc(db, 'users', user.uid, 'journalEntries', entry.id) // 🔄 updated path
           await setDoc(entryRef, {
             ...entry,
             uid: user.uid,
@@ -59,8 +59,7 @@ export const useJournalStore = defineStore('journal', {
 
       try {
         const q = query(
-          collection(db, 'journalEntries'),
-          where('uid', '==', user.uid),
+          collection(db, 'users', user.uid, 'journalEntries'), // 🔄 updated path
           orderBy('createdAt', 'desc'),
         )
         const querySnapshot = await getDocs(q)
@@ -80,9 +79,12 @@ export const useJournalStore = defineStore('journal', {
 
     async saveEditedEntry(id, updatedEntry) {
       console.log('🛠 Updating entry:', id)
+      const authStore = useAuthStore()
+      const user = authStore.user
+      if (!user?.uid) return
 
       try {
-        const entryRef = doc(db, 'journalEntries', id)
+        const entryRef = doc(db, 'users', user.uid, 'journalEntries', id) // 🔄 updated path
         await updateDoc(entryRef, {
           ...updatedEntry,
           updatedAt: serverTimestamp(),
@@ -106,9 +108,12 @@ export const useJournalStore = defineStore('journal', {
 
     async deleteEntry(id) {
       console.log('🗑 Deleting entry:', id)
+      const authStore = useAuthStore()
+      const user = authStore.user
+      if (!user?.uid) return
 
       try {
-        const entryRef = doc(db, 'journalEntries', id)
+        const entryRef = doc(db, 'users', user.uid, 'journalEntries', id) // 🔄 updated path
         await deleteDoc(entryRef)
 
         this.journalEntries = this.journalEntries.filter((entry) => entry.id !== id)

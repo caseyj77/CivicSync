@@ -3,10 +3,13 @@ import MindElixir from 'mind-elixir'
 import 'mind-elixir/style'
 import example from 'mind-elixir/example'
 import { onMounted, ref } from 'vue'
+import { mindMapStore } from '@/stores/mindMapStore'
 
+const useMindMapStore = mindMapStore()
 // Refs
 const mapRef = ref(null)
 const mindInstance = ref(null)
+const mapTitle = ref('')
 
 // On mount, initialize map
 onMounted(() => {
@@ -24,23 +27,47 @@ onMounted(() => {
 
 // Placeholder save/load methods
 const saveMap = () => {
+  if (!mapTitle.value.trim()) {
+    alert('Please enter a map title.')
+    return
+  }
+
   const data = mindInstance.value.getData()
-  console.log('Saving map:', data)
-  // TODO: save to Firestore
+  useMindMapStore.saveMindMap(mapTitle.value.trim(), data)
 }
 
-const loadMap = () => {
-  // TODO: load from Firestore
-  console.log('Would load map from Firestore')
+const loadMap = async () => {
+  if(!mapTitle.value.trim()) {
+    alert('Please enter a map title to load.')
+    return
+  }
+  
+  const data = await useMindMapStore.loadMindMap(mapTitle.value.trim())
+
+  if(data && mindInstance.value) {
+    mindInstance.value.clear() // clear previous map
+    mindInstance.value.init(data) // load saved map
+  } else {
+    alert('Map not found')
+  }
 }
+
+const clearMap = () => {
+  alert('This will clear your current Mind Map. Do you want to continue')
+  mindInstance.value.clear()
+  console.log('Map content cleared')
+}
+
 </script>
 
 <template>
   <div class="mindmap-wrapper">
     <div ref="mapRef" class="mindmap-canvas"></div>
     <div class="mindmap-actions">
+      <input class="input" placeholder="title" v-model="mapTitle" />
       <button @click="saveMap">Save Map</button>
       <button @click="loadMap">Load Map</button>
+      <button @click="clearMap">Clear Map</button>
     </div>
   </div>
 </template>
