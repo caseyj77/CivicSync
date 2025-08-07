@@ -4,6 +4,7 @@ import 'mind-elixir/style'
 import example from 'mind-elixir/example'
 import { onMounted, ref } from 'vue'
 import { mindMapStore } from '@/stores/mindMapStore'
+import MindMapCardGrid from './MindMapCardGrid.vue'
 
 const useMindMapStore = mindMapStore()
 // Refs
@@ -45,7 +46,6 @@ const loadMap = async () => {
   const data = await useMindMapStore.loadMindMap(mapTitle.value.trim())
 
   if(data && mindInstance.value) {
-    mindInstance.value.clear() // clear previous map
     mindInstance.value.init(data) // load saved map
   } else {
     alert('Map not found')
@@ -53,8 +53,18 @@ const loadMap = async () => {
 }
 
 const clearMap = () => {
-  alert('This will clear your current Mind Map. Do you want to continue')
-  mindInstance.value.clear()
+  const confirmed = confirm('This will clear your current Mind Map. Do you want to continue')
+  if (!confirmed) return
+  
+  const emptyMap = {
+    nodeData: {
+      id: 'me-root',
+      topic: 'New Map',
+      root: true,
+      children: [],
+    },
+  }
+  mindInstance.value.init(emptyMap)
   console.log('Map content cleared')
 }
 
@@ -70,6 +80,9 @@ const clearMap = () => {
       <button @click="clearMap">Clear Map</button>
     </div>
   </div>
+  <div>
+    <MindMapCardGrid />
+   </div>
 </template>
 
 <style scoped>
