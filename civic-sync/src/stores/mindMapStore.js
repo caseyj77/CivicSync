@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { db } from '@/firebase'
 import { useAuthStore } from './authStore'
-import { doc, setDoc, getDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, getDocs, collection } from 'firebase/firestore'
 
 
 
@@ -75,11 +75,30 @@ export const mindMapStore = defineStore('mindMap', () => {
     }
   }
 
+  async function loadAllMindMaps() {
+    const authStore = useAuthStore()
+    const uid = authStore.user?.uid
+    if (!uid) return
+
+    const mapRef = collection(db, 'users', uid, 'mindMaps')
+    try {
+      const snapshot = await getDocs(mapRef)
+      mindMaps.value = snapshot.docs.map(doc => ({ 
+        id: doc.id,
+         ...doc.data(),
+        }))
+      console.log('📊 Loaded all mind maps')
+    } catch (err) {
+      console.error('Faild to load mind maps:', err)
+    }
+  }
+
   return {
     mindMaps,
     currentMapId,
     saveMindMap,
     loadMindMap,
     loadedMapData,
+    loadAllMindMaps
   }
 }) // closing brackets

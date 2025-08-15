@@ -7,26 +7,38 @@ import { mindMapStore } from '@/stores/mindMapStore'
 import MindMapCardGrid from './MindMapCardGrid.vue'
 
 const useMindMapStore = mindMapStore()
+
 // Refs
 const mapRef = ref(null)
 const mindInstance = ref(null)
 const mapTitle = ref('')
 
-// On mount, initialize map
+// On mount, initialize MindElixir and load latest map
 onMounted(() => {
-  mindInstance.value = new MindElixir({
-    el: mapRef.value,
-    direction: MindElixir.LEFT,
-    draggable: true,
-    contextMenu: true,
-    toolBar: true,
-    nodeMenu: true,
-    keypress: true,
-  })
-  mindInstance.value.init(example) // replace with DB data later
+  (async () => {
+    mindInstance.value = new MindElixir({
+      el: mapRef.value,
+      direction: MindElixir.LEFT,
+      draggable: true,
+      contextMenu: true,
+      toolBar: true,
+      nodeMenu: true,
+      keypress: true,
+    })
+    mindInstance.value.init(example) // Initial placeholder
+
+    await useMindMapStore.loadAllMindMaps()
+
+    const latest = useMindMapStore.mindMaps[0]
+    if (latest) {
+      mapTitle.value = latest.mapId
+      const data = await useMindMapStore.loadMindMap(latest.mapId)
+      if (data) mindInstance.value.init(data)
+    }
+  })()
 })
 
-// Placeholder save/load methods
+// Save map to Firestore
 const saveMap = () => {
   if (!mapTitle.value.trim()) {
     alert('Please enter a map title.')
@@ -37,25 +49,27 @@ const saveMap = () => {
   useMindMapStore.saveMindMap(mapTitle.value.trim(), data)
 }
 
+// Load map by title
 const loadMap = async () => {
-  if(!mapTitle.value.trim()) {
+  if (!mapTitle.value.trim()) {
     alert('Please enter a map title to load.')
     return
   }
-  
+
   const data = await useMindMapStore.loadMindMap(mapTitle.value.trim())
 
-  if(data && mindInstance.value) {
-    mindInstance.value.init(data) // load saved map
+  if (data && mindInstance.value) {
+    mindInstance.value.init(data)
   } else {
     alert('Map not found')
   }
 }
 
+// Clear current map
 const clearMap = () => {
-  const confirmed = confirm('This will clear your current Mind Map. Do you want to continue')
+  const confirmed = confirm('This will clear your current Mind Map. Do you want to continue?')
   if (!confirmed) return
-  
+
   const emptyMap = {
     nodeData: {
       id: 'me-root',
@@ -65,9 +79,8 @@ const clearMap = () => {
     },
   }
   mindInstance.value.init(emptyMap)
-  console.log('Map content cleared')
+  console.log('🧹 Map content cleared')
 }
-
 </script>
 
 <template>
@@ -82,7 +95,7 @@ const clearMap = () => {
   </div>
   <div>
     <MindMapCardGrid />
-   </div>
+  </div>
 </template>
 
 <style scoped>

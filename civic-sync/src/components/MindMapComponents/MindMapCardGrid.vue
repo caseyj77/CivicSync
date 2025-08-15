@@ -1,3 +1,4 @@
+<!-- MindMapCardGrid.vue -->
 <script setup>
 import { computed } from 'vue'
 import { mindMapStore } from '@/stores/mindMapStore'

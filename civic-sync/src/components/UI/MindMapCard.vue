@@ -1,3 +1,4 @@
+<!-- MindMapCard.vue -->
 <script setup>
 defineProps({
   title: {
